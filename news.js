@@ -67,3 +67,18 @@ exports.readNews = function(category)
     }
 }
 
+exports.readNewsMongo = async function(category)
+{
+    if(!category)
+    {
+        let news = await Article.find();
+        return news;        
+    }
+    else
+    {
+        let news = await Article.find({'category':`${category}`});
+        return news; 
+
+    }
+}
+

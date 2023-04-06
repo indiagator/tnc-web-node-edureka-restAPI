@@ -50,15 +50,15 @@ exports.authenticate = function (username,password)
 exports.authenticateMongo = async function (username,password)
 {
 
-    let credential = await Credential.findOne({username : `${username}`},['password']).exec();
+    let credential = await Credential.findOne({username : `${username}`},['password','usertype']).exec(); // 5ms
     
     if(credential.password === password )
     {
-        return true;
+        return {'auth':true,'usertype':`${credential.usertype}`};
     }
     else
     { 
-        return false;
+        return {'auth':false,'usertype':null};
     }
 
 }
